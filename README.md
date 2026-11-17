@@ -37,5 +37,7 @@ tests/            pytest
 
 ## 배포 (Streamlit Community Cloud)
 
-앱 서버의 파일시스템은 휘발성이므로 외부 PostgreSQL + 외부 오브젝트 스토리지를 사용하고,
-접속 정보는 Cloud의 Secrets에 설정한다. (PRD 7장 참고)
+앱 서버의 파일시스템은 휘발성이므로 외부 PostgreSQL(Supabase, Neon 등) 하나만 준비한다.
+업로드 파일도 기본 설정(`[storage] backend = "db"`)에서는 이 DB에 저장되므로 별도 스토리지가 필요 없다.
+Cloud의 Secrets에 `DATABASE_URL`과 `[admin]`을 설정한다. (`.streamlit/secrets.toml.example` 참고)
+무료 DB 용량(보통 500MB 안팎)이 업로드 파일과 함께 쓰이니, 큰 파일을 많이 올릴 팀이라면 용량을 확인한다.
